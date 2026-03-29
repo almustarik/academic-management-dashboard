@@ -9,7 +9,7 @@ import { Student, Course, Grade } from '@/types';
 import { exportToCSV } from '@/utils/csvExport';
 import { Download, TrendingUp } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
-import { Card, Select, Table, Typography, Button, Space, Row, Col, Tag, notification } from 'antd';
+import { Card, Select, Table, Typography, Button, Space, Row, Col, Tag, App } from 'antd';
 import { ApexOptions } from 'apexcharts';
 
 const { Title, Text } = Typography;
@@ -21,6 +21,7 @@ interface CoursePerformance {
 }
 
 export function ReportsPage() {
+  const { notification } = App.useApp();
   const [selectedCourseId, setSelectedCourseId] = useState<string>('');
 
   const { data: courses = [], isLoading: loadC } = useQuery({ queryKey: ['courses'], queryFn: courseService.getAll });
@@ -87,9 +88,9 @@ export function ReportsPage() {
   const handleExportStudents = () => {
     try {
       exportToCSV(students, 'all_students_report');
-      notification.success({ message: 'Export initiated successfully' });
+      notification.success({ title: 'Export initiated successfully' });
     } catch (err) {
-      notification.error({ message: 'Failed to export CSV' });
+      notification.error({ title: 'Failed to export CSV' });
     }
   };
 
@@ -97,9 +98,9 @@ export function ReportsPage() {
     if (selectedCourseTopStudents.length === 0) return;
     try {
       exportToCSV(selectedCourseTopStudents, `top_students_${selectedCourseId}`);
-      notification.success({ message: 'Export initiated successfully' });
+      notification.success({ title: 'Export initiated successfully' });
     } catch {
-      notification.error({ message: 'Failed to export CSV' });
+      notification.error({ title: 'Failed to export CSV' });
     }
   };
 
@@ -116,7 +117,7 @@ export function ReportsPage() {
   ];
 
   return (
-    <Space direction="vertical" size={24} style={{ width: '100%' }}>
+    <Space orientation="vertical" size={24} style={{ width: '100%' }}>
       <div className="flex justify-between items-center">
         <div>
           <Title level={2} style={{ marginTop: 0, marginBottom: 4 }}>Reports Module</Title>
@@ -127,7 +128,7 @@ export function ReportsPage() {
         </Button>
       </div>
 
-      <Card bordered={false} className="shadow-sm" loading={loading} title={
+      <Card variant="borderless" className="shadow-sm" loading={loading} title={
         <div className="flex items-center gap-2">
           <TrendingUp className="text-sky-500 h-5 w-5" />
           <span>Enrollment Overview</span>
@@ -136,7 +137,7 @@ export function ReportsPage() {
         {courses.length > 0 && <ChartWrapper options={chartOptions as any} series={chartSeries} type="area" height={320} />}
       </Card>
 
-      <Card bordered={false} className="shadow-sm" loading={loading} title="Top Students per Course" extra={
+      <Card variant="borderless" className="shadow-sm" loading={loading} title="Top Students per Course" extra={
         <Space>
           <Select
             placeholder="Select a Course..."

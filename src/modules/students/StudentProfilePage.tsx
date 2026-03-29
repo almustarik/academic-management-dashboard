@@ -48,7 +48,7 @@ export function StudentProfilePage() {
 
   const loading = loadingSt || loadingGr || loadingCo;
 
-  if (loading) return <Card loading={true} className="mt-8 max-w-5xl mx-auto shadow-sm" bordered={false} />;
+  if (loading) return <Card loading={true} className="mt-8 max-w-5xl mx-auto shadow-sm" variant="borderless" />;
 
   if (!student) {
     return (
@@ -85,7 +85,7 @@ export function StudentProfilePage() {
         <ArrowLeftOutlined className="mr-2" /> Back to Students
       </Link>
 
-      <Card bordered={false} className="shadow-sm">
+      <Card variant="borderless" className="shadow-sm">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <Title level={2} style={{ margin: 0 }}>{student.name}</Title>
@@ -103,7 +103,7 @@ export function StudentProfilePage() {
         </div>
       </Card>
 
-      <Card title={<Space><BookOutlined className="text-blue-500" /> Enrolled Courses & Grades</Space>} bordered={false} className="shadow-sm">
+      <Card title={<Space><BookOutlined className="text-blue-500" /> Enrolled Courses & Grades</Space>} variant="borderless" className="shadow-sm">
         <Table 
           scroll={{ x: 'max-content' }}
           dataSource={coursesWithGrades}

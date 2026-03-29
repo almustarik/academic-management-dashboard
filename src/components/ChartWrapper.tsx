@@ -10,7 +10,7 @@ const Chart = dynamic(() => import('react-apexcharts'), {
 
 interface ChartWrapperProps {
   options: ApexOptions;
-  series: ApexAxisChartSeries | ApexNonAxisChartSeries;
+  series: any[];
   type?: 'line' | 'area' | 'bar' | 'pie' | 'donut' | 'radar' | 'scatter' | 'heatmap';
   height?: string | number;
   width?: string | number;

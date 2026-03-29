@@ -55,7 +55,7 @@ export function CourseListPage() {
   ];
 
   return (
-    <Space direction="vertical" size={24} style={{ width: '100%' }}>
+    <Space orientation="vertical" size={24} style={{ width: '100%' }}>
       <div className="flex justify-between items-center">
         <div>
           <Title level={2} style={{ marginTop: 0, marginBottom: 4 }}>Courses</Title>

@@ -1,16 +1,17 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Layout, Menu, Button, Drawer, Typography } from 'antd';
+import { Layout, Menu, Button, Drawer, Typography, App } from 'antd';
 import { HomeOutlined, TeamOutlined, BookOutlined, BankOutlined, BarChartOutlined, MenuOutlined, SyncOutlined } from '@ant-design/icons';
 import { usePathname, useRouter } from 'next/navigation';
 import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { notification, Popconfirm } from 'antd';
+import { Popconfirm } from 'antd';
 
 const { Header, Sider, Content } = Layout;
 
 export function MainLayout({ children }: { children: React.ReactNode }) {
+  const { notification } = App.useApp();
   const router = useRouter();
   const pathname = usePathname();
   const screens = useBreakpoint();
@@ -25,7 +26,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries();
-      notification.success({ message: 'Database reset to initial state successfully.' });
+      notification.success({ title: 'Database reset to initial state successfully.' });
     }
   });
 
@@ -80,8 +81,8 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
           closable={false}
           onClose={() => setDrawerVisible(false)}
           open={drawerVisible}
-          bodyStyle={{ padding: 0 }}
-          width={240}
+          styles={{ body: { padding: 0 } }}
+          size="default"
         >
           {sidebarContent}
         </Drawer>

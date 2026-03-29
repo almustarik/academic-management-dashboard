@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Form, Select, Button, Card, Typography, Row, Col, notification, Modal, Table, Space } from 'antd';
+import { Form, Select, Button, Card, Typography, Row, Col, Table, Space, App } from 'antd';
 import { Users, BookOpen, UserPlus, Save } from 'lucide-react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { studentService } from '@/services/studentService';
@@ -11,7 +11,6 @@ import { gradeService } from '@/services/gradeService';
 import { ExclamationCircleOutlined, EditOutlined } from '@ant-design/icons';
 
 const { Title, Text } = Typography;
-const { confirm } = Modal;
 
 interface FacultyBulkActionPayload {
   courseId: string;
@@ -20,6 +19,7 @@ interface FacultyBulkActionPayload {
 }
 
 export function FacultyPanelPage() {
+  const { notification, modal } = App.useApp();
   const [enrollForm] = Form.useForm();
   const [assignForm] = Form.useForm();
   const queryClient = useQueryClient();
@@ -54,7 +54,7 @@ export function FacultyPanelPage() {
       }
     },
     onSuccess: (_, variables) => {
-      notification.success({ message: `Successfully enrolled ${variables.studentIds?.length} students.` });
+      notification.success({ title: `Successfully enrolled ${variables.studentIds?.length} students.` });
       queryClient.invalidateQueries({ queryKey: ['students'] });
       queryClient.invalidateQueries({ queryKey: ['courses'] });
       enrollForm.resetFields();
@@ -71,7 +71,7 @@ export function FacultyPanelPage() {
       }
     },
     onSuccess: (_, variables) => {
-      notification.success({ message: `Successfully assigned ${variables.instructorIds?.length} instructors.` });
+      notification.success({ title: `Successfully assigned ${variables.instructorIds?.length} instructors.` });
       queryClient.invalidateQueries({ queryKey: ['courses'] });
       assignForm.resetFields();
     }
@@ -100,19 +100,19 @@ export function FacultyPanelPage() {
     },
     onError: (err, variables, context) => {
       queryClient.setQueryData(['grades', gradingCourse], context?.previousGrades);
-      notification.error({ message: 'Failed to update grades.' });
+      notification.error({ title: 'Failed to update grades.' });
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['grades', gradingCourse] });
     },
     onSuccess: () => {
-      notification.success({ message: 'Grades successfully updated.' });
+      notification.success({ title: 'Grades successfully updated.' });
       setGradeChanges({});
     }
   });
 
   const onBulkEnroll = (values: FacultyBulkActionPayload) => {
-    confirm({
+    modal.confirm({
       title: 'Are you sure you want to bulk enroll these students?',
       icon: <ExclamationCircleOutlined />,
       content: 'This action will instantly update student records.',
@@ -165,7 +165,7 @@ export function FacultyPanelPage() {
   ];
 
   return (
-    <Space direction="vertical" size={24} style={{ width: '100%' }}>
+    <Space orientation="vertical" size={24} style={{ width: '100%' }}>
       <div>
         <Title level={2} style={{ marginTop: 0, marginBottom: 4 }}>Faculty Operations</Title>
         <Text type="secondary">Manage bulk enrollments, instructor assignments, and grade students.</Text>
@@ -174,7 +174,7 @@ export function FacultyPanelPage() {
       <Row gutter={[24, 24]}>
         {/* Bulk Enroll Students */}
         <Col xs={24} md={12}>
-          <Card bordered={false} className="shadow-sm h-full" loading={loading} title={<div className="flex items-center gap-2"><Users className="text-blue-600 h-5 w-5" /><span>Bulk Enroll</span></div>}>
+          <Card variant="borderless" className="shadow-sm h-full" loading={loading} title={<div className="flex items-center gap-2"><Users className="text-blue-600 h-5 w-5" /><span>Bulk Enroll</span></div>}>
             <Form form={enrollForm} layout="vertical" onFinish={onBulkEnroll}>
               <Form.Item name="courseId" label="Select Course" rules={[{ required: true }]}>
                 <Select placeholder="Choose a course" options={courses.map(c => ({ label: c.title, value: c.id }))} size="large" />
@@ -191,7 +191,7 @@ export function FacultyPanelPage() {
 
         {/* Bulk Assign Instructors */}
         <Col xs={24} md={12}>
-          <Card bordered={false} className="shadow-sm h-full" loading={loading} title={<div className="flex items-center gap-2"><BookOpen className="text-green-600 h-5 w-5" /><span>Bulk Assign Instructors</span></div>}>
+          <Card variant="borderless" className="shadow-sm h-full" loading={loading} title={<div className="flex items-center gap-2"><BookOpen className="text-green-600 h-5 w-5" /><span>Bulk Assign Instructors</span></div>}>
             <Form form={assignForm} layout="vertical" onFinish={onBulkAssign}>
               <Form.Item name="courseId" label="Select Course" rules={[{ required: true }]}>
                 <Select placeholder="Choose a course" options={courses.map(c => ({ label: c.title, value: c.id }))} size="large" />
@@ -208,7 +208,7 @@ export function FacultyPanelPage() {
 
         {/* Grade Students Panel */}
         <Col xs={24}>
-          <Card bordered={false} className="shadow-sm" loading={loading} title={<div className="flex items-center gap-2"><EditOutlined className="text-yellow-600 text-lg" /><span>Grade Students</span></div>}>
+          <Card variant="borderless" className="shadow-sm" loading={loading} title={<div className="flex items-center gap-2"><EditOutlined className="text-yellow-600 text-lg" /><span>Grade Students</span></div>}>
             <div className="mb-4 max-w-sm">
               <Text strong className="block mb-2">Select Course to Grade</Text>
               <Select 

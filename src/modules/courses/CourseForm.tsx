@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import { Form, Input, Select, Button, Card, Typography, Space, notification } from 'antd';
+import { Form, Input, Select, Button, Card, Typography, Space, App } from 'antd';
 import { MinusCircleOutlined, PlusOutlined, ArrowLeftOutlined, SaveOutlined } from '@ant-design/icons';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { courseService } from '@/services/courseService';
@@ -23,6 +23,7 @@ export function CourseForm() {
   const id = params.id as string;
   const isEdit = Boolean(id);
   
+  const { notification } = App.useApp();
   const [form] = Form.useForm();
   const queryClient = useQueryClient();
 
@@ -47,7 +48,7 @@ export function CourseForm() {
   const createMutation = useMutation({
     mutationFn: courseService.create,
     onSuccess: () => {
-      notification.success({ message: 'Course created successfully!' });
+      notification.success({ title: 'Course created successfully!' });
       queryClient.invalidateQueries({ queryKey: ['courses'] });
       router.push('/courses');
     }
@@ -64,14 +65,14 @@ export function CourseForm() {
     },
     onError: (err, newCourse, context) => {
       queryClient.setQueryData(['course', id], context?.previousCourse);
-      notification.error({ message: 'Update failed, rolling back.' });
+      notification.error({ title: 'Update failed, rolling back.' });
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['courses'] });
       queryClient.invalidateQueries({ queryKey: ['course', id] });
     },
     onSuccess: () => {
-      notification.success({ message: 'Course updated successfully!' });
+      notification.success({ title: 'Course updated successfully!' });
       router.push('/courses');
     }
   });
@@ -85,15 +86,15 @@ export function CourseForm() {
     }
   };
 
-  if (isEdit && isLoading) return <Card loading={true} style={{ maxWidth: '768px', margin: '32px auto 0' }} bordered={false} />;
+  if (isEdit && isLoading) return <Card loading={true} style={{ maxWidth: '768px', margin: '32px auto 0' }} variant="borderless" />;
 
   return (
-    <Space direction="vertical" size={24} style={{ width: '100%', maxWidth: '768px', margin: '0 auto', display: 'flex' }}>
+    <Space orientation="vertical" size={24} style={{ width: '100%', maxWidth: '768px', margin: '0 auto', display: 'flex' }}>
       <Link href="/courses" className="text-gray-500 hover:text-blue-600 flex items-center mb-2">
         <ArrowLeftOutlined className="mr-2" /> Back to Courses
       </Link>
 
-      <Card bordered={false} className="shadow-sm">
+      <Card variant="borderless" className="shadow-sm">
         <Title level={3} style={{ marginTop: 0, marginBottom: 24 }}>{isEdit ? 'Edit Course' : 'Create Course'}</Title>
         
         <Form

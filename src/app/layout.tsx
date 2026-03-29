@@ -4,7 +4,7 @@ import "./globals.css";
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { ReactQueryProvider } from "@/lib/reactQuery";
 import { MainLayout } from "@/components/MainLayout";
-import { ConfigProvider } from 'antd';
+import { ConfigProvider, App } from 'antd';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,7 +36,9 @@ export default function RootLayout({
                 }
               }}
             >
-              <MainLayout>{children}</MainLayout>
+              <App>
+                <MainLayout>{children}</MainLayout>
+              </App>
             </ConfigProvider>
           </AntdRegistry>
         </ReactQueryProvider>

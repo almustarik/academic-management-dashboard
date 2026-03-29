@@ -29,7 +29,8 @@
       "year": "Sophomore",
       "courses": [
         "C102",
-        "C104"
+        "C104",
+        "m8Gnhh9Egb0"
       ],
       "GPA": 3.2
     },
@@ -39,7 +40,8 @@
       "email": "diana@university.edu",
       "year": "Freshman",
       "courses": [
-        "C101"
+        "C101",
+        "m8Gnhh9Egb0"
       ],
       "GPA": 3.9
     },
@@ -161,6 +163,17 @@
         "F205"
       ],
       "enrollmentCount": 3
+    },
+    {
+      "title": "Test Course II",
+      "instructors": [
+        "F205",
+        "F201",
+        "F202",
+        "F203"
+      ],
+      "enrollmentCount": 2,
+      "id": "m8Gnhh9Egb0"
     }
   ],
   "faculty": [
@@ -304,6 +317,18 @@
       "studentId": "S1011",
       "courseId": "C101",
       "grade": "B-"
+    },
+    {
+      "courseId": "m8Gnhh9Egb0",
+      "studentId": "S1003",
+      "grade": "B+",
+      "id": "Kq30bY2wjkQ"
+    },
+    {
+      "courseId": "m8Gnhh9Egb0",
+      "studentId": "S1004",
+      "grade": "C+",
+      "id": "drNsw4B4zrs"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

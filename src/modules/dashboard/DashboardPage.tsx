@@ -79,17 +79,17 @@ export function DashboardPage() {
 
       <Row gutter={[24, 24]}>
         <Col xs={24} sm={8}>
-          <Card bordered={false} className="shadow-sm">
+          <Card variant="borderless" className="shadow-sm">
             <Statistic title="Total Students" value={students.length} prefix={<Users className="text-blue-500 mr-2" size={20} />} loading={loading} />
           </Card>
         </Col>
         <Col xs={24} sm={8}>
-          <Card bordered={false} className="shadow-sm">
+          <Card variant="borderless" className="shadow-sm">
             <Statistic title="Total Courses" value={courses.length} prefix={<BookOpen className="text-blue-500 mr-2" size={20} />} loading={loading} />
           </Card>
         </Col>
         <Col xs={24} sm={8}>
-          <Card bordered={false} className="shadow-sm">
+          <Card variant="borderless" className="shadow-sm">
             <Statistic title="Total Faculty" value={faculty.length} prefix={<GraduationCap className="text-blue-500 mr-2" size={20} />} loading={loading} />
           </Card>
         </Col>
@@ -97,12 +97,12 @@ export function DashboardPage() {
 
       <Row gutter={[24, 24]}>
         <Col xs={24} lg={12}>
-          <Card title="Top Students (By GPA)" bordered={false} className="shadow-sm h-full">
+          <Card title="Top Students (By GPA)" variant="borderless" className="shadow-sm h-full">
             <Table scroll={{ x: 'max-content' }} dataSource={topStudents} columns={studentCols} rowKey="id" pagination={false} loading={loading} size="middle" />
           </Card>
         </Col>
         <Col xs={24} lg={12}>
-          <Card bordered={false} className="shadow-sm h-full" style={{ padding: 0 }}>
+          <Card variant="borderless" className="shadow-sm h-full" style={{ padding: 0 }}>
              {popularCourses.length > 0 && <ChartWrapper options={chartOptions} series={chartSeries} type="bar" height={320} />}
           </Card>
         </Col>

@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import { Form, Input, Select, Button, Card, Typography, Row, Col, Space, InputNumber, notification } from 'antd';
+import { Form, Input, Select, Button, Card, Typography, Row, Col, Space, InputNumber, App } from 'antd';
 import { MinusCircleOutlined, PlusOutlined, ArrowLeftOutlined, SaveOutlined } from '@ant-design/icons';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { studentService } from '@/services/studentService';
@@ -35,6 +35,7 @@ export function StudentForm() {
   const id = params.id as string;
   const isEdit = Boolean(id);
   const queryClient = useQueryClient();
+  const { notification } = App.useApp();
 
   const { control, handleSubmit, reset } = useForm<StudentFormValues>({
     resolver: zodResolver(studentSchema),
@@ -101,7 +102,7 @@ export function StudentForm() {
       return createdStudent;
     },
     onSuccess: () => {
-      notification.success({ message: 'Student created successfully!' });
+      notification.success({ title: 'Student created successfully!' });
       queryClient.invalidateQueries({ queryKey: ['students'] });
       router.push('/students');
     }
@@ -156,11 +157,11 @@ export function StudentForm() {
 
       queryClient.setQueryData(['student', id], optimisticStudent);
       
-      notification.success({ message: 'Student updating...' });
+      notification.success({ title: 'Student updating...' });
       return { previousStudent };
     },
     onError: (err, newStudentData, context) => {
-      notification.error({ message: 'Update failed, rolling back.' });
+      notification.error({ title: 'Update failed, rolling back.' });
       queryClient.setQueryData(['student', id], context?.previousStudent);
     },
     onSettled: () => {
@@ -184,12 +185,12 @@ export function StudentForm() {
   if (isLoadingData) return <Card loading={true} style={{ maxWidth: '768px', margin: '32px auto 0' }} />;
 
   return (
-    <Space direction="vertical" size={24} style={{ width: '100%', maxWidth: '768px', margin: '0 auto', display: 'flex' }}>
+    <Space orientation="vertical" size={24} style={{ width: '100%', maxWidth: '768px', margin: '0 auto', display: 'flex' }}>
       <Link href="/students" className="text-gray-500 hover:text-blue-600 flex items-center mb-2">
         <ArrowLeftOutlined className="mr-2" /> Back to Students
       </Link>
 
-      <Card bordered={false} className="shadow-sm">
+      <Card variant="borderless" className="shadow-sm">
         <Title level={3} style={{ marginTop: 0, marginBottom: 24 }}>{isEdit ? 'Edit Student' : 'Add New Student'}</Title>
         
         <Form layout="vertical" onFinish={handleSubmit(onSubmit)}>

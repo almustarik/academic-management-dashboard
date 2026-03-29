@@ -44,7 +44,7 @@ export function StudentListPage() {
       dataIndex: 'name',
       key: 'name',
       render: (text: string, record: Student) => (
-        <Space direction="vertical" size={0}>
+        <Space orientation="vertical" size={0}>
           <Link href={`/students/${record.id}`} className="font-medium text-blue-600 hover:text-blue-800">{text}</Link>
           <Text type="secondary" style={{ fontSize: '12px' }}>{record.email}</Text>
         </Space>
@@ -83,7 +83,7 @@ export function StudentListPage() {
   ];
 
   return (
-    <Space direction="vertical" size={24} style={{ width: '100%' }}>
+    <Space orientation="vertical" size={24} style={{ width: '100%' }}>
       <div className="flex justify-between items-center">
         <div>
           <Title level={2} style={{ marginTop: 0, marginBottom: 4 }}>Students</Title>
