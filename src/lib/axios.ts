@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const apiClient = axios.create({
-  baseURL: 'http://localhost:3001', // json-server mock API url
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001', // dynamic API URL with fallback
   headers: {
     'Content-Type': 'application/json',
   },
