@@ -237,13 +237,13 @@
       "id": "G8",
       "studentId": "S1005",
       "courseId": "C103",
-      "grade": "A+"
+      "grade": "C"
     },
     {
       "id": "G9",
       "studentId": "S1005",
       "courseId": "C105",
-      "grade": "A+"
+      "grade": "B"
     },
     {
       "id": "G10",
@@ -279,7 +279,7 @@
       "id": "G15",
       "studentId": "S1009",
       "courseId": "C105",
-      "grade": "A"
+      "grade": "C-"
     },
     {
       "id": "G16",
