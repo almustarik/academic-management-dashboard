@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Layout, Menu, Button, Drawer, Typography, App } from 'antd';
 import { HomeOutlined, TeamOutlined, BookOutlined, BankOutlined, BarChartOutlined, MenuOutlined, SyncOutlined } from '@ant-design/icons';
 import { usePathname, useRouter } from 'next/navigation';
+import Link from 'next/link';
 import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Popconfirm } from 'antd';
@@ -50,9 +51,11 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
   const sidebarContent = (
     <div className="flex flex-col h-full bg-white">
       <div className="flex items-center justify-center border-b border-gray-100" style={{ height: '64px', minHeight: '64px' }}>
-        <Typography.Title level={4} style={{ margin: 0, color: '#1677ff' }}>
-          {collapsed && !isMobile ? 'UD' : 'UniDash'}
-        </Typography.Title>
+        <Link href="/" className="hover:opacity-80 transition-opacity">
+          <Typography.Title level={4} style={{ margin: 0, color: '#1677ff' }}>
+            {collapsed && !isMobile ? 'UD' : 'UniDash'}
+          </Typography.Title>
+        </Link>
       </div>
       <div className="flex-1 overflow-y-auto w-full">
         <Menu
@@ -104,7 +107,9 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
         {isMobile && (
           <Header className="px-4 flex items-center shadow-sm border-b border-gray-100" style={{ padding: 0, height: 64, backgroundColor: '#fff' }}>
             <Button type="text" icon={<MenuOutlined />} onClick={() => setDrawerVisible(true)} className="ml-4 text-gray-600 text-lg" />
-            <span className="text-xl font-bold text-blue-600 ml-4">UniDash</span>
+            <Link href="/" className="text-xl font-bold text-blue-600 ml-4 hover:opacity-80 transition-opacity">
+              UniDash
+            </Link>
           </Header>
         )}
         <Content style={{ padding: '24px', minHeight: 'calc(100vh - 64px)', maxWidth: '1600px', margin: '0 auto', width: '100%' }}>
