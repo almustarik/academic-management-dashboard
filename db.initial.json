@@ -5,10 +5,7 @@
       "name": "Alice Johnson",
       "email": "alice@university.edu",
       "year": "Junior",
-      "courses": [
-        "C101",
-        "C102"
-      ],
+      "courses": ["C101", "C102"],
       "GPA": 3.8
     },
     {
@@ -16,10 +13,7 @@
       "name": "Bob Smith",
       "email": "bob@university.edu",
       "year": "Senior",
-      "courses": [
-        "C101",
-        "C103"
-      ],
+      "courses": ["C101", "C103"],
       "GPA": 3.5
     },
     {
@@ -27,10 +21,7 @@
       "name": "Charlie Brown",
       "email": "charlie@university.edu",
       "year": "Sophomore",
-      "courses": [
-        "C102",
-        "C104"
-      ],
+      "courses": ["C102", "C104"],
       "GPA": 3.2
     },
     {
@@ -38,9 +29,7 @@
       "name": "Diana Prince",
       "email": "diana@university.edu",
       "year": "Freshman",
-      "courses": [
-        "C101"
-      ],
+      "courses": ["C101"],
       "GPA": 3.9
     },
     {
@@ -48,10 +37,7 @@
       "name": "Ethan Hunt",
       "email": "ethan@university.edu",
       "year": "Senior",
-      "courses": [
-        "C103",
-        "C105"
-      ],
+      "courses": ["C103", "C105"],
       "GPA": 3.1
     },
     {
@@ -59,10 +45,7 @@
       "name": "Fiona Gallagher",
       "email": "fiona@university.edu",
       "year": "Junior",
-      "courses": [
-        "C102",
-        "C105"
-      ],
+      "courses": ["C102", "C105"],
       "GPA": 3.7
     },
     {
@@ -70,9 +53,7 @@
       "name": "George Clooney",
       "email": "george@university.edu",
       "year": "Senior",
-      "courses": [
-        "C104"
-      ],
+      "courses": ["C104"],
       "GPA": 3.4
     },
     {
@@ -80,10 +61,7 @@
       "name": "Hannah Abbott",
       "email": "hannah@university.edu",
       "year": "Sophomore",
-      "courses": [
-        "C101",
-        "C103"
-      ],
+      "courses": ["C101", "C103"],
       "GPA": 3.6
     },
     {
@@ -91,9 +69,7 @@
       "name": "Ian Somerhalder",
       "email": "ian@university.edu",
       "year": "Freshman",
-      "courses": [
-        "C105"
-      ],
+      "courses": ["C105"],
       "GPA": 2.9
     },
     {
@@ -101,11 +77,7 @@
       "name": "Jane Austen",
       "email": "jane@university.edu",
       "year": "Junior",
-      "courses": [
-        "C102",
-        "C103",
-        "C104"
-      ],
+      "courses": ["C102", "C103", "C104"],
       "GPA": 4
     },
     {
@@ -113,9 +85,7 @@
       "name": "Kevin Hart",
       "email": "kevin@university.edu",
       "year": "Sophomore",
-      "courses": [
-        "C101"
-      ],
+      "courses": ["C101"],
       "GPA": 3
     }
   ],
@@ -123,43 +93,31 @@
     {
       "id": "C101",
       "title": "Introduction to Computer Science",
-      "instructors": [
-        "F201"
-      ],
+      "instructors": ["F201"],
       "enrollmentCount": 5
     },
     {
       "id": "C102",
       "title": "Calculus I",
-      "instructors": [
-        "F202",
-        "F201"
-      ],
+      "instructors": ["F202", "F201"],
       "enrollmentCount": 4
     },
     {
       "id": "C103",
       "title": "Physics for Engineers",
-      "instructors": [
-        "F203"
-      ],
+      "instructors": ["F203"],
       "enrollmentCount": 4
     },
     {
       "id": "C104",
       "title": "Data Structures and Algorithms",
-      "instructors": [
-        "F201",
-        "F204"
-      ],
+      "instructors": ["F201", "F204"],
       "enrollmentCount": 3
     },
     {
       "id": "C105",
       "title": "Modern World History",
-      "instructors": [
-        "F205"
-      ],
+      "instructors": ["F205"],
       "enrollmentCount": 3
     }
   ],

@@ -1,6 +1,7 @@
 # Academic Management Dashboard
 
 ## Tech Stack
+
 - **Next.js 14** (App Router) & **TypeScript**
 - **React Query** (Data fetching & state)
 - **Ant Design** & **Tailwind CSS** (UI)
@@ -17,7 +18,7 @@
    ```bash
    npm run server
    ```
-   *(Keep this terminal open)*
+   _(Keep this terminal open)_
 3. **Start the Next.js app in a new terminal:**
    ```bash
    npm run dev
@@ -25,6 +26,7 @@
    Then navigate to `http://localhost:3000` 🚀
 
 ## Folder Structure
+
 ```text
 src/
  ├── app/         # Next.js pages and routes
