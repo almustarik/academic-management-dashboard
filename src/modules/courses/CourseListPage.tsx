@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { courseService } from '@/services/courseService';
@@ -14,6 +14,8 @@ const { Title, Text } = Typography;
 export function CourseListPage() {
   const { data: courses = [], isLoading: loadingCo } = useQuery({ queryKey: ['courses'], queryFn: courseService.getAll });
   const { data: faculty = [], isLoading: loadingFa } = useQuery({ queryKey: ['faculty'], queryFn: facultyService.getAll });
+  const [current, setCurrent] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
 
   const loading = loadingCo || loadingFa;
   
@@ -24,6 +26,11 @@ export function CourseListPage() {
     });
     return { ...course, instructorNames: names };
   }), [courses, faculty]);
+
+  // Reset to first page when data changes
+  React.useEffect(() => {
+    setCurrent(1);
+  }, [courses, faculty]);
 
   const columns = [
     { title: 'Title', dataIndex: 'title', key: 'title', render: (text: string) => <Text strong>{text}</Text> },
@@ -75,7 +82,15 @@ export function CourseListPage() {
         rowKey="id" 
         loading={loading}
         className="shadow-sm border border-gray-100 rounded-xl overflow-hidden"
-        pagination={{ pageSize: 10 }}
+        pagination={{ 
+          current, 
+          pageSize, 
+          showSizeChanger: true,
+          onChange: (page, size) => {
+            setCurrent(page);
+            setPageSize(size);
+          }
+        }}
       />
     </Space>
   );

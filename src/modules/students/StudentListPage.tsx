@@ -16,6 +16,8 @@ export function StudentListPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [yearFilter, setYearFilter] = useState<string>('');
   const [courseFilter, setCourseFilter] = useState<string>('');
+  const [current, setCurrent] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
   const { data: students = [], isLoading } = useQuery({
@@ -37,6 +39,11 @@ export function StudentListPage() {
       return matchSearch && matchYear && matchCourse;
     });
   }, [students, debouncedSearchTerm, yearFilter, courseFilter]);
+
+  // Reset to first page when filters change
+  React.useEffect(() => {
+    setCurrent(1);
+  }, [debouncedSearchTerm, yearFilter, courseFilter]);
 
   const columns = [
     {
@@ -135,7 +142,15 @@ export function StudentListPage() {
         columns={columns} 
         rowKey="id" 
         loading={isLoading} 
-        pagination={{ pageSize: 10, showSizeChanger: true }}
+        pagination={{ 
+          current, 
+          pageSize, 
+          showSizeChanger: true,
+          onChange: (page, size) => {
+            setCurrent(page);
+            setPageSize(size);
+          }
+        }}
         className="shadow-sm border border-gray-100 rounded-xl overflow-hidden"
       />
     </Space>
